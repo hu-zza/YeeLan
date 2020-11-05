@@ -14,7 +14,11 @@ public class Main
     final static Scanner SCANNER = new Scanner(System.in);
     private final static String RANGE_REQUEST_TEMPLATE = "%n[ %s - %s ] (Unit: %s)%n%S: ";
     private final static String ENUM_REQUEST_TEMPLATE  = "%n[ %s ]%n%S: ";
-    private final static String LOGO                   = "__  __          __             \n" + "\\ \\/ /__  ___  / /  ____ _____ \n" + " \\  / _ \\/ _ \\/ /  / __ `/ __ \\\n" + " / /  __/  __/ /__/ /_/ / / / /\n" + "/_/\\___/\\___/_____|__,_/_/ /_/ \n";
+    private final static String LOGO                   = "__  __          __             \n" +
+                                                         "\\ \\/ /__  ___  / /  ____ _____ \n" +
+                                                         " \\  / _ \\/ _ \\/ /  / __ `/ __ \\\n" +
+                                                         " / /  __/  __/ /__/ /_/ / / / /\n" +
+                                                         "/_/\\___/\\___/_____|__,_/_/ /_/ \n";
     private static InetAddress Yee_A;
     private static InetAddress Yee_B;
     private static boolean     waitingForUserInput = true;
