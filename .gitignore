@@ -1,5 +1,4 @@
 # Project exclude paths
-.gitconfig
 /.gradle/
 /build/
 /build/classes/java/main/
