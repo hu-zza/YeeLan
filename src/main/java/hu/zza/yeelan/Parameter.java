@@ -55,11 +55,6 @@ enum Parameter
         return this.values[index];
     }
     
-    String[] getValues()
-    {
-        return this.values.clone();
-    }
-    
     String getValuesAsString()
     {
         StringJoiner joiner = new StringJoiner(", ");
