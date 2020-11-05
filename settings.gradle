@@ -1,2 +1,3 @@
-rootProject.name = 'YeeLan'
+rootProject.name = 'yeelan'
+include('app')
 

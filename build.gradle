@@ -3,8 +3,12 @@ plugins {
     id 'application'
 }
 
-group 'hu.kutatok'
+group 'hu.zza.yeelan'
 version '0.1'
+
+ext {
+    javaMainClass = "hu.zza.yeelan.Main"
+}
 
 repositories {
     mavenCentral()
