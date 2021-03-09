@@ -9,8 +9,7 @@ import static hu.zza.yeelan.ParameterType.INT_RANGE;
 import static hu.zza.yeelan.ParameterType.NULL;
 
 
-enum Parameter
-{
+enum Parameter {
     EMPTY("", "", NULL, ""),
     
     COLOR_TEMPERATURE("Color temperature", "", INT_RANGE, "K", "2700", "6500"),
@@ -41,8 +40,8 @@ enum Parameter
     final         String        unit;
     private final String[]      values;
     
-    Parameter(String name, String description, ParameterType type, String unit, String... values)
-    {
+    
+    Parameter(String name, String description, ParameterType type, String unit, String... values) {
         this.name        = name;
         this.description = description;
         this.type        = type;
@@ -50,20 +49,19 @@ enum Parameter
         this.values      = values;
     }
     
-    String getValue(int index)
-    {
-        return this.values[index];
-    }
     
-    String getValuesAsString()
-    {
+    String getValuesAsString() {
         StringJoiner joiner = new StringJoiner(", ");
         
-        for (String s : this.values)
-        {
+        for (String s : this.values) {
             joiner.add(s);
         }
         
         return joiner.toString();
+    }
+    
+    
+    String getValue(int index) {
+        return this.values[index];
     }
 }

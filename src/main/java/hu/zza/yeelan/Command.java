@@ -16,13 +16,11 @@ import static hu.zza.yeelan.Parameter.PROPERTY;
 import static hu.zza.yeelan.Parameter.TIMER;
 
 
-class Command
-{
+class Command {
     static final HashMap<String, Parameter[]> COMMANDS = new HashMap<>();
     static final Parameter[]                  PARAMS   = new Parameter[4];
     
-    static
-    {
+    static {
         PARAMS[0] = EMPTY;
         PARAMS[1] = EMPTY;
         PARAMS[2] = EMPTY;
