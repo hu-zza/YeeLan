@@ -11,25 +11,28 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AddressResolver {
+
   private static Logger logger = Logger.getLogger(AddressResolver.class.getName());
 
-  public InetAddress parseString(String address) throws UnknownHostException {
-    logger.finer(() -> "Address to parse: " + address);
+  public InetAddress parseString(String ipAddress) throws UnknownHostException {
+    logger.finer(() -> "Address to parse: " + ipAddress);
 
-    try (var scanner = new Scanner(address)) {
+    try (var scanner = new Scanner(ipAddress)) {
       scanner.useDelimiter(Pattern.compile("\\D+"));
 
-      byte[] addressArray = convertIntArrayToByteArray(scanner.tokens()
-          .mapToInt(Integer::parseInt)
-          .toArray());
+      int[] intAddress =
+          scanner.tokens()
+              .mapToInt(Integer::parseInt)
+              .toArray();
 
-      logger.finer(() -> "Parsed address: " + Arrays.toString(addressArray));
+      byte[] address = getAsByteArray(intAddress);
 
-      return InetAddress.getByAddress(addressArray);
+      logger.finer(() -> "Parsed address: " + Arrays.toString(address));
+      return InetAddress.getByAddress(address);
     }
   }
 
-  private static byte[] convertIntArrayToByteArray(int[] integers) {
+  private static byte[] getAsByteArray(int[] integers) {
     ByteBuffer byteBuffer = ByteBuffer.allocate(integers.length);
     Arrays.stream(integers)
         .mapToObj(i -> (byte) i)

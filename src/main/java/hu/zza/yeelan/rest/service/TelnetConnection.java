@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.StringJoiner;
 import java.util.logging.Logger;
 
 public interface TelnetConnection {
@@ -19,7 +20,7 @@ public interface TelnetConnection {
             new OutputStreamWriter(yeeSocket.getOutputStream()));
         BufferedReader in = new BufferedReader(new InputStreamReader(yeeSocket.getInputStream()))
     ) {
-      var toSend = String.format(COMMAND_FORMAT, method, String.join(",", parameters));
+      var toSend = String.format(COMMAND_FORMAT, method, getParameterString(parameters));
       logger.finer(() -> "Telnet command: " + toSend);
       logger.finer(() -> "Send to device: " + address.getHostAddress());
       out.write(toSend + "\r\n");
@@ -28,5 +29,19 @@ public interface TelnetConnection {
     } catch (IOException e) {
       System.err.printf("%nIOException at hu.zza.yeelan.rest.TelnetClient:%n%n%s%n%n", e);
     }
+  }
+
+  private static String getParameterString(String[] parameters) {
+    StringJoiner joiner = new StringJoiner(",");
+
+    for (String param : parameters) {
+      try {
+        joiner.add(String.valueOf(Integer.parseInt(param)));
+      } catch (NumberFormatException ignored) {
+        joiner.add(String.format("\"%s\"", param));
+      }
+    }
+
+    return joiner.toString();
   }
 }
