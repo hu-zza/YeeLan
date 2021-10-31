@@ -6,3 +6,19 @@ config:
   devices:
     desk: 192.168.1.107
     shelf: 192.168.1.108
+
+  light:
+    day:
+      min: 1
+      low: 20
+      mean: 35
+      mid: 50
+      great: 70
+      max: 100
+    night:
+      min: 1
+      moon: 2
+      night: 10
+      light: 25
+      mid: 50
+      max: 100

@@ -14,7 +14,7 @@ public interface TelnetConnection {
   Logger logger = Logger.getLogger(TelnetConnection.class.getName());
   String COMMAND_FORMAT = "{\"id\":1,\"method\":\"%s\",\"params\":[%s]}";
 
-  static void send(InetAddress address, String method, String... parameters) {
+  static String send(InetAddress address, String method, String... parameters) {
     try (Socket yeeSocket = new Socket(address, 55443);
         BufferedWriter out = new BufferedWriter(
             new OutputStreamWriter(yeeSocket.getOutputStream()));
@@ -25,9 +25,11 @@ public interface TelnetConnection {
       logger.finer(() -> "Send to device: " + address.getHostAddress());
       out.write(toSend + "\r\n");
       out.flush();
+      return in.readLine();
 
     } catch (IOException e) {
       System.err.printf("%nIOException at hu.zza.yeelan.rest.TelnetClient:%n%n%s%n%n", e);
+      return "";
     }
   }
 

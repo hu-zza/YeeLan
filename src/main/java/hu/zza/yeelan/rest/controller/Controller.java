@@ -1,6 +1,8 @@
 package hu.zza.yeelan.rest.controller;
 
 import hu.zza.yeelan.rest.model.Device;
+import hu.zza.yeelan.rest.model.LightMode;
+import hu.zza.yeelan.rest.model.Response;
 import hu.zza.yeelan.rest.service.DeviceCatalog;
 import java.util.List;
 import java.util.Map;
@@ -13,19 +15,12 @@ public class Controller {
 
   private final DeviceCatalog deviceCatalog;
 
-  private static final Map<String, Integer> lightTemplates = Map.of(
-      "min", 1,
-      "moon", 2,
-      "night", 6,
-      "calm", 10,
-      "light", 20,
-      "mid", 50,
-      "great", 75,
-      "max", 100);
+  //power,active_mode,color_mode,bright,nl_br,ct
 
   Controller(DeviceCatalog deviceCatalog) {
     this.deviceCatalog = deviceCatalog;
   }
+
 
   @GetMapping("/catalog")
   public Map<String, Device> getCatalog() {
@@ -38,42 +33,46 @@ public class Controller {
   }
 
   @GetMapping("/lights")
-  public Map<String, Integer> getLightTemplates() {
-    return lightTemplates;
+  public Map<LightMode, Map<String, Integer>> getLightTemplates() {
+    return deviceCatalog.getLightTemplates();
   }
 
   @GetMapping("/{name}/toggle")
-  public void toggle(@PathVariable String name) {
-    deviceCatalog.useDevice(name, "toggle");
+  public Response toggle(@PathVariable String name) {
+    return deviceCatalog.useDevice(name, "toggle");
   }
 
   @GetMapping("/{name}/{template}")
-  public void setBrightnessTemplate(@PathVariable String name, @PathVariable String template) {
-    int level = lightTemplates.getOrDefault(template, 20);
-    deviceCatalog.useDevice(name, "set_bright", String.valueOf(level), "smooth", "3000");
+  public Response setBrightnessTemplate(@PathVariable String name, @PathVariable String template) {
+    return deviceCatalog.useLightTemplate(name, template, "smooth", "3000");
   }
 
   @GetMapping("/{name}/less")
-  public void decreaseBrightness(@PathVariable String name) {
-    adjustBrightness(name, "-10");
+  public Response decreaseBrightness(@PathVariable String name) {
+    return adjustBrightness(name, "-10");
   }
 
   @GetMapping("/{name}/less/{brightness}")
-  public void decreaseBrightness(@PathVariable String name, @PathVariable int brightness) {
-    adjustBrightness(name, String.valueOf(-brightness));
+  public Response decreaseBrightness(@PathVariable String name, @PathVariable int brightness) {
+    return adjustBrightness(name, String.valueOf(-brightness));
   }
 
   @GetMapping("/{name}/more")
-  public void increaseBrightness(@PathVariable String name) {
-    adjustBrightness(name, "10");
+  public Response increaseBrightness(@PathVariable String name) {
+    return adjustBrightness(name, "10");
   }
 
   @GetMapping("/{name}/more/{brightness}")
-  public void increaseBrightness(@PathVariable String name, @PathVariable int brightness) {
-    adjustBrightness(name, String.valueOf(brightness));
+  public Response increaseBrightness(@PathVariable String name, @PathVariable int brightness) {
+    return adjustBrightness(name, String.valueOf(brightness));
   }
 
-  private void adjustBrightness(String name, String brightness) {
-    deviceCatalog.useDevice(name, "adjust_bright", brightness, "3000");
+  private Response adjustBrightness(String name, String brightness) {
+    return deviceCatalog.useDevice(name, "adjust_bright", brightness, "3000");
+  }
+
+  @GetMapping("/test/{name}/{command}/{params}")
+  public Response test(@PathVariable String name, @PathVariable String command, @PathVariable String params) {
+    return deviceCatalog.useDevice(name, command, params.split("\\W"));
   }
 }
