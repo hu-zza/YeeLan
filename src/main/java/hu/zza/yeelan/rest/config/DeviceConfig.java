@@ -5,20 +5,20 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "config")
+@ConfigurationProperties(prefix = "config.device")
 public class DeviceConfig {
 
-  private Map<String, String> devices;
+  private Map<String, String> addresses;
 
   public DeviceConfig(Map<String, String> devices) {
-    this.devices = devices;
+    this.addresses = devices;
   }
 
-  public Map<String, String> getDevices() {
-    return Map.copyOf(devices);
+  public Map<String, String> getAddresses() {
+    return Map.copyOf(addresses);
   }
 
-  void setDevices(Map<String, String> devices) {
-    this.devices = devices;
+  void setAddresses(Map<String, String> addresses) {
+    this.addresses = addresses;
   }
 }

@@ -1,4 +1,4 @@
-package hu.zza.yeelan.rest.service;
+package hu.zza.yeelan.rest.service.resolver;
 
 import hu.zza.yeelan.rest.config.LightConfig;
 import hu.zza.yeelan.rest.model.LightMode;
@@ -7,13 +7,13 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LightTemplateCatalog {
+public class LightTemplates {
 
   private LightConfig lightConfig;
 
   private Map<LightMode, Map<String, Integer>> lightTemplates = new HashMap<>();
 
-  public LightTemplateCatalog(LightConfig lightConfig) {
+  public LightTemplates(LightConfig lightConfig) {
     this.lightConfig = lightConfig;
     updateCatalog();
   }

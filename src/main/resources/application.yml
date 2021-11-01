@@ -3,9 +3,10 @@ logging:
     hu.zza: TRACE
 
 config:
-  devices:
-    desk: 192.168.1.107
-    shelf: 192.168.1.108
+  device:
+    addresses:
+      desk: 192.168.1.107
+      shelf: 192.168.1.108
 
   light:
     day:

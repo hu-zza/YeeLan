@@ -1,47 +1,39 @@
 package hu.zza.yeelan.rest.model;
 
 import java.net.InetAddress;
+import java.util.EnumMap;
+import java.util.Map;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.Getter;
 
+@Data
 public class Device {
+  public static final Device NULL = new Device("Non-existent device", DeviceAddress.NULL);
 
-  public static final Device NULL = new Device("Non-existent device",
-      InetAddress.getLoopbackAddress(), false);
-  
-  private String name;
-  private InetAddress ipAddress;
-  private boolean active;
+  private final String name;
+  private final DeviceAddress deviceAddress;
 
-  public Device(String name, InetAddress ipAddress, boolean active) {
-    this.name = name;
-    this.ipAddress = ipAddress;
-    this.active = active;
+  @Getter(AccessLevel.NONE)
+  private final Map<Property, String> state = new EnumMap<>(Property.class);
+
+  public String getState(Property property) {
+    return state.getOrDefault(property, "");
   }
 
-  public static Device getUnreachableWithName(String name) {
-    return new Device(name, InetAddress.getLoopbackAddress(), false);
+  public String updateState(Property property, String value) {
+    return state.put(property, value);
   }
 
-  public String getName() {
-    return name;
+  public InetAddress getAddress() {
+    return deviceAddress.getIpAddress();
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public boolean isReachable() {
+    return deviceAddress.isReachable();
   }
 
-  public InetAddress getIpAddress() {
-    return ipAddress;
-  }
-
-  public void setIpAddress(InetAddress ipAddress) {
-    this.ipAddress = ipAddress;
-  }
-
-  public boolean isActive() {
-    return active;
-  }
-
-  public void setActive(boolean active) {
-    this.active = active;
+  public boolean isCapable(Property property) {
+    return !"".equals(state.getOrDefault(property, ""));
   }
 }
