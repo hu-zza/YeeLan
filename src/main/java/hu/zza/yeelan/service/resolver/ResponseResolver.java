@@ -1,8 +1,8 @@
-package hu.zza.yeelan.rest.service.resolver;
+package hu.zza.yeelan.service.resolver;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hu.zza.yeelan.rest.model.Response;
+import hu.zza.yeelan.model.Response;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package hu.zza.yeelan.rest.model;
+package hu.zza.yeelan.model;
 
 public enum Property {
   POWER, BRIGHT, CT, RGB, HUE, SAT, COLOR_MODE,

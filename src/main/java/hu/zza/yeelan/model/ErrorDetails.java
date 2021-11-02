@@ -1,4 +1,4 @@
-package hu.zza.yeelan.rest.model;
+package hu.zza.yeelan.model;
 
 import lombok.Data;
 

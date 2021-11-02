@@ -1,4 +1,4 @@
-package hu.zza.yeelan.rest.model;
+package hu.zza.yeelan.model;
 
 public enum LightMode {
   DAY, NIGHT;
@@ -13,6 +13,7 @@ public enum LightMode {
 
   @Override
   public String toString() {
-    return super.toString().toLowerCase();
+    return super.toString()
+        .toLowerCase();
   }
 }

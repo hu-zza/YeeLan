@@ -1,6 +1,6 @@
-package hu.zza.yeelan.rest.service.resolver;
+package hu.zza.yeelan.service.resolver;
 
-import hu.zza.yeelan.rest.model.DeviceAddress;
+import hu.zza.yeelan.model.DeviceAddress;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;

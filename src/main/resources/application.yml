@@ -1,6 +1,10 @@
 logging:
   level:
-    hu.zza: TRACE
+    hu.zza.yeelan.controller: TRACE
+    hu.zza.yeelan.service: TRACE
+    hu.zza.yeelan.service.factory: INFO
+    hu.zza.yeelan.service.resolver: TRACE
+
 
 config:
   device:

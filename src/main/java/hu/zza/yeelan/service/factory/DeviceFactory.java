@@ -1,15 +1,13 @@
-package hu.zza.yeelan.rest.service.factory;
+package hu.zza.yeelan.service.factory;
 
-import hu.zza.yeelan.rest.config.DeviceConfig;
-import hu.zza.yeelan.rest.model.Device;
-import hu.zza.yeelan.rest.service.resolver.AddressResolver;
+import hu.zza.yeelan.config.DeviceConfig;
+import hu.zza.yeelan.model.Device;
+import hu.zza.yeelan.service.resolver.AddressResolver;
 import java.util.List;
 import java.util.Map.Entry;
 import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 
-@Log
 @AllArgsConstructor
 @Service
 public class DeviceFactory {
