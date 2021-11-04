@@ -8,9 +8,16 @@ logging:
 
 config:
   device:
-    addresses:
-      desk: 192.168.1.107
-      shelf: 192.168.1.108
+    list:
+      desk:
+        address: 192.168.1.107
+        property_profile: [basic, night]
+      shelf:
+        address: 192.168.1.108
+        property_profile: basic
+    property_profile:
+      basic: [POWER, BRIGHT, CT, COLOR_MODE]
+      night: [ACTIVE_MODE, NL_BR]
 
   light:
     day:

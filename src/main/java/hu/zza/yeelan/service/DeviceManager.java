@@ -22,10 +22,6 @@ import org.springframework.stereotype.Service;
 public class DeviceManager {
 
   private static final List<Property> propertyList = Arrays.asList(Property.values());
-  private static final String[] propertyArray =
-      propertyList.stream()
-          .map(Property::toString)
-          .toArray(String[]::new);
 
   private final DeviceFactory deviceFactory;
   private final LightTemplates lightTemplates;
@@ -52,7 +48,7 @@ public class DeviceManager {
   public void updateDevice(Device device) {
     List<String> result;
 
-    for (Property p : propertyList) {
+    for (Property p : device.getMainProperties()) {
       result = useDevice(device, "get_prop", p.toString())
           .getResult();
       if (result != null && !result.isEmpty()) {
@@ -109,12 +105,19 @@ public class DeviceManager {
 
   public Response toggleNightMode(Device device) {
     if (device.isCapable(Property.NL_BR)) {
+      Response response;
       if ("0".equals(device.getState(Property.ACTIVE_MODE))) {
-        return useDevice(device, "set_power", "on", "smooth", "3000", "5");
+        response = useDevice(device, "set_power", "on", "smooth", "3000", "5");
       } else {
-        return useDevice(device, "set_power", "on", "smooth", "3000", "1");
+        response = useDevice(device, "set_power", "on", "smooth", "3000", "1");
       }
+      updateDeviceState(device, response);
+      return response;
     }
     return Response.getSimpleError(1, 2, "This device has no Night Light mode");
+  }
+
+  private void updateDeviceState(Device device, Response response) {
+    response.getParams().forEach((k, v) -> device.updateState(Property.parse(k), v));
   }
 }

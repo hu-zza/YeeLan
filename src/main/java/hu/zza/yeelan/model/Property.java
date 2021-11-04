@@ -5,9 +5,9 @@ public enum Property {
   FLOWING, DELAYOFF, FLOW_PARAMS, MUSIC_ON, NAME,
   BG_POWER, BG_FLOWING, BG_FLOW_PARAMS, BG_CT,
   BG_LMODE, BG_BRIGHT, BG_RGB, BG_HUE, BG_SAT,
-  NL_BR, ACTIVE_MODE;
+  NL_BR, ACTIVE_MODE, ACTIVE_BRIGHT;
 
-  public Property parse(String property) {
+  public static Property parse(String property) {
     return Property.valueOf(property.toUpperCase());
   }
 
