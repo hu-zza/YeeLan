@@ -10,10 +10,10 @@ config:
   device:
     list:
       desk:
-        address: 192.168.1.107
+        address: 192.168.0.50
         property_profile: [basic, night]
       shelf:
-        address: 192.168.1.108
+        address: 192.168.0.51
         property_profile: basic
     property_profile:
       basic: [POWER, BRIGHT, CT, COLOR_MODE]
